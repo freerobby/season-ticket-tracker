@@ -1,6 +1,8 @@
 class Web < Sinatra::Base
-  set :views, "#{File.dirname(__FILE__)}/views"
+  register Sinatra::Partial
 
+  set :views, "#{File.dirname(__FILE__)}/views"
+  set :partial_template_engine, :slim
   set :base_app_title, "Season Ticket Tracker"
 
   get '/' do
