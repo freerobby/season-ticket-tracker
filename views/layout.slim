@@ -2,8 +2,9 @@ doctype html
 html
   head
     title #{title}
+    link rel="stylesheet" type="text/css" href="/css/screen.css" media="screen"
 
-  body
+  body class="body"
     #content
       == yield
 
