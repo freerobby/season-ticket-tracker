@@ -10,7 +10,7 @@ class Web < Sinatra::Base
     is_connectable = ping_result == PG::PQPING_OK ? true : false
 
     if (!is_connectable)
-      raise "Cannot connect to database"
+      halt 500, slim(:issue, :locals => {:title => "#{settings.base_app_title} | Error"})
     end
 
     @conn = PG::Connection.new('localhost', 5432, nil, nil, 'stt', nil, nil)
