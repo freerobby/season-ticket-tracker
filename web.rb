@@ -6,6 +6,8 @@ class Web < Sinatra::Base
   set :base_app_title, "Season Ticket Tracker"
   set :db_connection_info, { :host => 'localhost', :port => 5432, :dbname => 'stt'}
 
+  @conn = nil
+
   def build_view_options(title, rest={})
     view_options = Hash.new
 
@@ -39,7 +41,9 @@ class Web < Sinatra::Base
       halt 500, slim(:issue, :locals => build_view_options("Error", :info => conn_err))
     end
 
-    @conn = PG::Connection.new(settings.db_connection_info)
+    if @conn.nil?
+      @conn = PG::Connection.new(settings.db_connection_info)
+    end
   end
 
   get '/' do
