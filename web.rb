@@ -7,11 +7,24 @@ class Web < Sinatra::Base
   set :db_connection_info, { :host => 'localhost', :port => 5432, :dbname => 'stt'}
 
   before do
-    ping_result = PG::Connection.ping(settings.db_connection_info)
-    is_connectable = ping_result == PG::PQPING_OK ? true : false
+    conn_err = ""
+    can_connect = false
 
-    if (!is_connectable)
-      halt 500, slim(:issue, :locals => {:title => "#{settings.base_app_title} | Error"})
+    ping_result = PG::Connection.ping(settings.db_connection_info)
+
+    case ping_result
+    when PG::PQPING_OK
+      can_connect = true
+    when PG::PQPING_REJECT
+      conn_err = "Server is alive but rejecting connections"
+    when PG::PQPING_NO_RESPONSE
+      conn_err = "Could not establish connection"
+    when PG::PQPING_NO_ATTEMPT
+      conn_err = "Connection not attempted (bad params)"
+    end
+
+    if (!can_connect)
+      halt 500, slim(:issue, :locals => {:title => "#{settings.base_app_title} | Error", :info => conn_err})
     end
 
     @conn = PG::Connection.new(settings.db_connection_info)
