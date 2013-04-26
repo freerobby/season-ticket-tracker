@@ -39,10 +39,10 @@ class Web < Sinatra::Base
 
   before do
     if @DBconn.nil?
-      can_connect = ping_db_server(settings.db_connection_info)
+      ping = ping_db_server(settings.db_connection_info)
 
-      if (!can_connect)
-        halt 500, slim(:issue, :locals => build_view_options("Error", :info => conn_err))
+      if (!ping[:can_connect])
+        halt 500, slim(:issue, :locals => build_view_options("Error", :info => ping[:conn_err]))
       end
 
       conn_opts = { :host => settings.db_connection_info[:host],
