@@ -18,28 +18,33 @@ class Web < Sinatra::Base
     view_options
   end
 
-  before do
-    conn_err = ""
-    can_connect = false
+  def ping_db_server(connection_options)
+    value = { :conn_err => "", :can_connect => false }
 
-    ping_result = PG::Connection.ping(settings.db_connection_info)
+    ping_result = PG::Connection.ping(connection_options)
 
     case ping_result
     when PG::PQPING_OK
-      can_connect = true
+      value[:can_connect] = true
     when PG::PQPING_REJECT
-      conn_err = "Server is alive but rejecting connections"
+      value[:conn_err] = "Server is alive but rejecting connections"
     when PG::PQPING_NO_RESPONSE
-      conn_err = "Could not establish connection"
+      value[:conn_err] = "Could not establish connection"
     when PG::PQPING_NO_ATTEMPT
-      conn_err = "Connection not attempted (bad params)"
+      value[:conn_err] = "Connection not attempted (bad params)"
     end
 
-    if (!can_connect)
-      halt 500, slim(:issue, :locals => build_view_options("Error", :info => conn_err))
-    end
+    value
+  end
 
+  before do
     if @DBconn.nil?
+      can_connect = ping_db_server(settings.db_connection_info)
+
+      if (!can_connect)
+        halt 500, slim(:issue, :locals => build_view_options("Error", :info => conn_err))
+      end
+
       conn_opts = { :host => settings.db_connection_info[:host],
                     :database => settings.db_connection_info[:dbname] }
 
