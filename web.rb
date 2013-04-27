@@ -59,6 +59,8 @@ class Web < Sinatra::Base
   end
 
   get '/' do
-    slim :index, :locals => build_view_options("Home")
+    results = @DBconn[:games]
+
+    slim :index, :locals => build_view_options("Home", :results => results)
   end
 end
