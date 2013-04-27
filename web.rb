@@ -54,7 +54,7 @@ class Web < Sinatra::Base
         halt 500, slim(:issue, :locals => build_view_options("Error", :info => ping[:conn_err]))
       end
 
-      @DBconn = Sequel.postgres(settings.config_opts[DB_CONFIG_KEY])
+      @DBconn = Sequel.connect(settings.config_opts[DB_CONFIG_KEY])
     end
   end
 
