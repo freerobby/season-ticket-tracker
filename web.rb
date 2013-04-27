@@ -46,20 +46,12 @@ class Web < Sinatra::Base
     value
   end
 
-  before do
-    if @DBconn.nil?
-      ping = ping_db_server(settings.config_opts[DB_CONFIG_KEY])
-
-      if (!ping[:can_connect])
-        halt 500, slim(:issue, :locals => build_view_options("Error", :info => ping[:conn_err]))
-      end
-
-      @DBconn = Sequel.connect(settings.config_opts[DB_CONFIG_KEY])
-    end
+  configure do
+    DB = Sequel.connect(settings.config_opts[DB_CONFIG_KEY])
   end
 
   get '/' do
-    results = @DBconn[:games]
+    results = DB[:games]
 
     slim :index, :locals => build_view_options("Home", :results => results)
   end
