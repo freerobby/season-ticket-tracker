@@ -6,11 +6,39 @@ A project to handle managing season tickets.
 
 The following describes the different pieces needed to get Season Ticket Tracker running on your machine. It is based on development using Mac OS X.
 
+You will need a local instance of Postgres to connect to.
+
 ###Bundler
 
 After cloning the repository, run bundler to retrieve dependencies:
 
     $ bundle install
+
+###Database Configuration
+
+From command line, connect to `psql`:
+
+    $ psql -h localhost
+    
+Add a new database via `psql`:
+
+    localhost=# CREATE DATABASE stt;
+
+Modify config.yml to setup database connection:
+
+    dbopts:
+      :adapter: postgres
+      :host: localhost
+      :port: 5432
+      :database: stt
+
+###Schema
+
+Run the schema script to create the necessary database structure:
+
+    $ ruby schema.rb
+    
+In the future, migrations will be used to better handle changes. For now, when a table definition changes, it will have to be dropped (which would lose existing data) or the changes will have to be manually applied.
 
 ###Pow
 
