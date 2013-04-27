@@ -16,6 +16,7 @@ Sequel.connect(configopts["dbopts"]) do |db|
       String :location
       DateTime :game_time
       DateTime :last_updated
+      Integer :status
     end
 
     puts "Created - Games table"

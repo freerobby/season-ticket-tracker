@@ -51,8 +51,11 @@ class Web < Sinatra::Base
   end
 
   get '/' do
-    results = DB[:games]
+    results = Game.all
 
     slim :index, :locals => build_view_options("Home", :results => results)
   end
+
+  # require model classes
+  Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }
 end
