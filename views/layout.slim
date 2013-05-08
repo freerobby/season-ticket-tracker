@@ -8,18 +8,23 @@ html
     link rel="stylesheet" type="text/css" href="/css/screen.css" media="screen"
 
   body class="wrap"
-
-    section.header
+    header
       div.grid
-        div.whole
-          | Season Tickets
+        div.unit.whole
+          p
+            | Season Tickets
 
     section.content
       div.grid
-        div.whole
+        div.unit.whole
           == yield
 
-    section.footer
+    footer
       div.grid
-        div.whole
-          | Copyright &copy; 2013 - Rob Shaw
+        div.unit.one-third.center-on-mobiles
+          p
+            ' Built by
+            a href="http://twitter.com/borwahs/" Rob Shaw
+        div.unit.two-thirds.align-right.center-on-mobiles
+          p
+            a href="http://github.com/borwahs/season-ticket-tracker" Season Ticket Tracker

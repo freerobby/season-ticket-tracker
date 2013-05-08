@@ -1,1 +1,9 @@
 body { font-family: sans-serif; }
+
+header p {
+  font-size: 20px;
+}
+
+footer p {
+  font-size: 15px;
+}
