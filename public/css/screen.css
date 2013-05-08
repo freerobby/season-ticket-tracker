@@ -1,7 +1,28 @@
-body { font-family: sans-serif; }
+html {
+  background-color: #f0f0f0;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+}
+
+body > header {
+  background-color: #f0f0f0;
+}
+
+body > section {
+  background-color: #fff;
+}
+
+body > footer {
+  background-color: #f0f0f0;
+}
 
 header p {
-  font-size: 20px;
+  font-size: 30px;
+  line-height: 15px;
+  font-weight: 600;
 }
 
 footer p {
