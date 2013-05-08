@@ -1,5 +1,26 @@
 p Season Tickets
 
-ul
-  - for game in results
-    li #{game[:id]} - #{game[:opponent]}
+div#gamelist
+  table
+    th
+      | ID
+    th
+      | Opponent
+    th
+      | Location
+    th
+      | Game Time
+    th
+      | Status
+    - for game in results
+      tr
+        td
+          | #{game[:id]}
+        td
+          | #{game[:opponent]}
+        td
+          | #{game[:location]}
+        td
+          | #{game[:game_time]}
+        td
+          | #{game[:status]}
