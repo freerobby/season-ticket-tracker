@@ -53,6 +53,13 @@ To setup Season Ticket Tracker, run the following:
     
 Now you will be able to access the site at `http://stt.dev/`.
 
+##Open Source Usage
+
+The following is a list of open-source components used:
+
+* [Normalize.css](http://necolas.github.io/normalize.css/)
+* [Gridism](http://cobyism.com/gridism/)
+
 ##License
 
 Season Ticket Tracker is released under the MIT license.

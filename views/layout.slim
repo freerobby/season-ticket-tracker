@@ -2,11 +2,24 @@ doctype html
 html
   head
     title #{title}
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    link rel="stylesheet" type="text/css" href="/css/normalize.css" media="screen"
+    link rel="stylesheet" type="text/css" href="/css/gridism.css" media="screen"
     link rel="stylesheet" type="text/css" href="/css/screen.css" media="screen"
 
-  body class="body"
-    #content
-      == yield
+  body class="wrap"
 
-    #footer
-      | Copyright &copy; 2013 - Rob Shaw
+    section.header
+      div.grid
+        div.whole
+          | Season Tickets
+
+    section.content
+      div.grid
+        div.whole
+          == yield
+
+    section.footer
+      div.grid
+        div.whole
+          | Copyright &copy; 2013 - Rob Shaw
