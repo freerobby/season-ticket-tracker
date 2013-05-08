@@ -25,6 +25,10 @@ header p {
   font-weight: 600;
 }
 
+.game-list .game-header {
+  font-weight: bold;
+}
+
 footer p {
   font-size: 15px;
 }
