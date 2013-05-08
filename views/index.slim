@@ -1,16 +1,13 @@
 div.game-list
   div.grid
-    / to skip the first-child padding
-    div.unit.whole
-
     / header for make-shift table
-    div.unit.one-quarter.game-header
+    div.unit.one-quarter.hide-on-mobiles.game-header
       | ID
-    div.unit.one-quarter.game-header
+    div.unit.one-quarter.hide-on-mobiles.game-header
       | Opponent
-    div.unit.one-quarter.game-header
+    div.unit.one-quarter.hide-on-mobiles.game-header
       | Location
-    div.unit.one-quarter.game-header
+    div.unit.one-quarter.hide-on-mobiles.game-header
       | Game Time
 
     - for game in results
@@ -22,6 +19,3 @@ div.game-list
         | #{game[:location]}
       div.unit.one-quarter
         | #{game[:game_time]}
-
-    / to skip the last-child padding
-    div.unit.whole
