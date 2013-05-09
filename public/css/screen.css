@@ -1,14 +1,14 @@
 html {
-  background-color: #f0f0f0;
+  background-color: #f7f7f7;
 }
 
 body {
   font-family: sans-serif;
-  background-color: #f0f0f0;
+  background-color: #fff;
 }
 
 body > header {
-  background-color: #199adc;
+  background-color: #fff;
 }
 
 body > section {
@@ -16,30 +16,24 @@ body > section {
 }
 
 body > footer {
-  background-color: #f0f0f0;
-}
-
-header {
-  border-top: 3px solid #535b69;
+  background-color: #f7f7f7;
+  border-top: 3px solid #c4c9cc;
 }
 
 header p {
   font-size: 30px;
   line-height: 15px;
   font-weight: 600;
-  color: #fff;
 }
 
-.game-list {
-  padding: 20px 0 20px 0;
+.quick-view {
+  background-color: #f7f7f7;
+  border-top: 3px solid #c4c9cc;
+  border-bottom: 3px solid #c4c9cc;
 }
 
 .game-list .game-header {
   font-weight: bold;
-}
-
-footer {
-  border-top: 3px solid #535b69;
 }
 
 footer p {
