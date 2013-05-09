@@ -5,22 +5,10 @@ div.quick-view
 
 div.game-list
   div.grid
-    / header for make-shift table
-    div.unit.one-quarter.hide-on-mobiles.game-header
-      | ID
-    div.unit.one-quarter.hide-on-mobiles.game-header
-      | Opponent
-    div.unit.one-quarter.hide-on-mobiles.game-header
-      | Location
-    div.unit.one-quarter.hide-on-mobiles.game-header
-      | Game Time
-
     - for game in results
-      div.unit.one-quarter
-        | #{game[:id]}
-      div.unit.one-quarter
-        | #{game[:opponent]}
-      div.unit.one-quarter
-        | #{game[:location]}
-      div.unit.one-quarter
-        | #{game[:game_time]}
+      div.unit.one-quarter.game
+        div.details
+          p #{game[:id]}
+          p #{game[:opponent]}
+          p #{game[:location]}
+          p #{game[:game_time]}
