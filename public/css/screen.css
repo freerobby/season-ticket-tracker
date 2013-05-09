@@ -8,7 +8,7 @@ body {
 }
 
 body > header {
-  background-color: #f0f0f0;
+  background-color: #199adc;
 }
 
 body > section {
@@ -19,14 +19,27 @@ body > footer {
   background-color: #f0f0f0;
 }
 
+header {
+  border-top: 3px solid #535b69;
+}
+
 header p {
   font-size: 30px;
   line-height: 15px;
   font-weight: 600;
+  color: #fff;
+}
+
+.game-list {
+  padding: 20px 0 20px 0;
 }
 
 .game-list .game-header {
   font-weight: bold;
+}
+
+footer {
+  border-top: 3px solid #535b69;
 }
 
 footer p {
