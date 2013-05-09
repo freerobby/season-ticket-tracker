@@ -6,9 +6,13 @@ div.quick-view
 div.game-list
   div.grid
     - for game in results
+      - day_of_week = game[:game_time].strftime("%A")
+      - short_date = game[:game_time].strftime("%b %d")
+      - time = game[:game_time].strftime("%l:%M %p")
+
       div.unit.one-quarter.game
         div.details
-          p #{game[:id]}
+          p.heavy #{day_of_week}
+          p #{short_date} @ #{time}
+          p vs.
           p #{game[:opponent]}
-          p #{game[:location]}
-          p #{game[:game_time]}
