@@ -58,13 +58,11 @@ nav li a:hover {
   margin-top: 30px;
 }
 
-.game {
-  padding: 5px;
-}
-
 .game .details {
   background-color: #d0d4d7;
   padding: 10px;
+  height: 210px;
+  min-width: 120px;
   text-align: center;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
