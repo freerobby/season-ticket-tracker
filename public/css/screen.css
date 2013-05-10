@@ -26,6 +26,38 @@ header p {
   font-weight: 600;
 }
 
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  list-style-image: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+nav li a {
+  padding: 5px;
+  color: #53abff;
+  text-decoration: none;
+  background-color: #f7f7f7;
+  border: 2px solid #c4c9cc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+nav li a:hover {
+  background-color: #cecece;
+}
+
+.filter-nav {
+  margin-top: 30px;
+}
+
 .game {
   padding: 5px;
 }
