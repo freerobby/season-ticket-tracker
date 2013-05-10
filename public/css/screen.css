@@ -59,6 +59,7 @@ nav li a:hover {
 }
 
 .game .details {
+  margin: 10px;
   background-color: #d0d4d7;
   padding: 10px;
   height: 210px;

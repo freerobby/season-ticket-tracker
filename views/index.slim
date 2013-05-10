@@ -13,7 +13,7 @@ div.game-list
       - short_date = game[:game_time].strftime("%b %d")
       - time = game[:game_time].strftime("%l:%M %p")
 
-      div.unit.one-quarter.game
+      div.unit.no-gutters.one-quarter.game
         div.details
           p.heavy #{day_of_week}
           p #{short_date} @ #{time}
