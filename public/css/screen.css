@@ -94,3 +94,8 @@ nav li a:hover {
 footer p {
   font-size: 15px;
 }
+
+/* Simple jQuery Slider CSS Overrides */
+
+ul.bjqs-controls.v-centered li.bjqs-next a{background-color:#f7f7f7;padding:10px;}
+ul.bjqs-controls.v-centered li.bjqs-prev a{background-color:#f7f7f7;padding:10px;}
