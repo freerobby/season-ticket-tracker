@@ -76,6 +76,10 @@ nav li a:hover {
 }
 
 .quick-view {
+  background-image: url('/imgs/wrigley01.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 288px;
   background-color: #f7f7f7;
   border-top: 3px solid #c4c9cc;
   border-bottom: 3px solid #c4c9cc;
@@ -93,8 +97,3 @@ nav li a:hover {
 footer p {
   font-size: 15px;
 }
-
-/* Simple jQuery Slider CSS Overrides */
-
-ul.bjqs-controls.v-centered li.bjqs-next a{background-color:#f7f7f7;padding:10px;}
-ul.bjqs-controls.v-centered li.bjqs-prev a{background-color:#f7f7f7;padding:10px;}

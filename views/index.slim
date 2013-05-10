@@ -1,10 +1,4 @@
 div.quick-view
-  div.grid
-    div.unit.whole.no-gutters
-      div#banner
-        ul.bjqs
-          li: img src="/imgs/wrigley01.png"
-          li: img src="/imgs/wrigley02.png"
 
 div.game-list
   div.grid
@@ -19,16 +13,3 @@ div.game-list
           p #{short_date} @ #{time}
           p vs.
           p #{game[:opponent]}
-
-javascript:
-  jQuery(document).ready(function($) {
-    $('#banner').bjqs({
-        'height' : 288,
-        'width' : 978,
-        'responsive' : true,
-        'nexttext' : 'Next',
-        'prevtext' : 'Prev',
-        'showmarkers' : false,
-        'automatic' : false
-    });
-  });
