@@ -59,6 +59,8 @@ The following is a list of open-source components used:
 
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Gridism](http://cobyism.com/gridism/)
+* [Basic jQuery Slider] (http://basic-slider.com/)
+* [jQuery] (http://jquery.com/)
 
 ##License
 
