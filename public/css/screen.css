@@ -2,6 +2,10 @@ html {
   background-color: #f7f7f7;
 }
 
+a {
+  color: #525b6a;
+}
+
 body {
   font-family: sans-serif;
   background-color: #fff;
@@ -41,7 +45,6 @@ nav li {
 
 nav li a {
   padding: 5px;
-  color: #53abff;
   text-decoration: none;
   background-color: #f7f7f7;
   border: 2px solid #c4c9cc;
