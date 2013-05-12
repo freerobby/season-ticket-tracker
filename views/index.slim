@@ -3,9 +3,9 @@ div.quick-view
 div.game-list
   div.grid
     - for game in results
-      - day_of_week = game[:game_time].strftime("%A")
-      - short_date = game[:game_time].strftime("%b %d")
-      - time = game[:game_time].strftime("%l:%M %p")
+      - day_of_week = game[:date_time].strftime("%A")
+      - short_date = game[:date_time].strftime("%b %d")
+      - time = game[:date_time].strftime("%l:%M %p")
 
       div.unit.no-gutters.one-quarter.game
         div.details

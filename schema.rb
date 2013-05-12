@@ -13,10 +13,11 @@ Sequel.connect(configopts["dbopts"]) do |db|
     db.create_table(:games) do
       primary_key :id
       String :opponent
-      String :location
-      DateTime :game_time
+      String :stadium
+      String :description
+      DateTime :date_time
       DateTime :last_updated
-      Integer :status
+      Boolean :active
     end
 
     puts "Created - Games table"

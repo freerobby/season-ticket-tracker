@@ -1,7 +1,7 @@
 class Game < Sequel::Model(:games)
 
   def self.all
-    Game.where(:status => 1)
+    Game.where(:active => true)
   end
 
   def self.retrieve_by_id(id)
