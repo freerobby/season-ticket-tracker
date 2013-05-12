@@ -14,6 +14,10 @@ After cloning the repository, run bundler to retrieve dependencies:
 
     $ bundle install
 
+###MLB Schedules Gem
+
+Currently, this project is using my [MLBSchedules](http://github.com/borwahs/mlbschedules/) gem which has not been officially released. Make sure to pull down the repo and  install it if you plan to run the schedule_loader.
+
 ###Database Configuration
 
 From command line, connect to `psql`:
@@ -52,6 +56,14 @@ To setup Season Ticket Tracker, run the following:
     $ ln -s /path/to/season-ticket-tracker/ stt
     
 Now you will be able to access the site at `http://stt.dev/`.
+
+##Schedule Loader
+
+You can load the team's schedule using schedule_loader. At the moment, you can just run it with the following command:
+
+    $ ruby schedule_loader.rb
+    
+If you want to use a different year or team, you will have to change the class before running. This will be more robust in the future.
 
 ##Open Source Usage
 
