@@ -71,6 +71,8 @@ The following is a list of open-source components used:
 
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Gridism](http://cobyism.com/gridism/)
+* [jQuery](http://jquery.com/)
+* [Knockout.js](http://knockoutjs.com/)
 
 ##License
 
