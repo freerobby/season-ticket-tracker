@@ -1,15 +1,31 @@
 div.quick-view
 
 div.game-list
-  div.grid
-    - for game in results
-      - day_of_week = game[:date_time].strftime("%A")
-      - short_date = game[:date_time].strftime("%b %d")
-      - time = game[:date_time].strftime("%l:%M %p")
+  div.grid data-bind="foreach: games"
+    div.unit.no-gutters.one-quarter.game
+      div.details
+        p.heavy data-bind="text: datetime"
+        p
+        p vs.
+        p data-bind="text: opponent"
 
-      div.unit.no-gutters.one-quarter.game
-        div.details
-          p.heavy #{day_of_week}
-          p #{short_date} @ #{time}
-          p vs.
-          p #{game[:opponent]}
+javascript:
+  $(document).ready(function(){
+    function Game(data) {
+      var self = this;
+      self.datetime = data.date_time;
+      self.opponent = data.opponent;
+      self.id = data.id;
+    }
+
+    function GameViewModel() {
+      var self = this;
+      self.games = ko.observableArray([]);
+      $.getJSON("/games", function(raw) {
+          var games = $.map(raw, function(item) { return new Game(item) });
+          self.games(games);
+      });
+    }
+
+    ko.applyBindings(new GameViewModel());
+  });

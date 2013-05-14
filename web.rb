@@ -1,4 +1,5 @@
 require 'yaml'
+require 'json'
 
 class Web < Sinatra::Base
   CONFIG_FILE = "config.yml"
@@ -55,6 +56,16 @@ class Web < Sinatra::Base
 
     slim :index, :locals => build_view_options("Home", :results => results)
   end
+
+  get '/games' do
+    content_type 'application/json'
+
+    results = Game.all
+
+    results.to_json
+  end
+
+  Sequel::Model.plugin :json_serializer
 
   # require model classes
   Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }
