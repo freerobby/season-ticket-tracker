@@ -73,6 +73,7 @@ The following is a list of open-source components used:
 * [Gridism](http://cobyism.com/gridism/)
 * [jQuery](http://jquery.com/)
 * [Knockout.js](http://knockoutjs.com/)
+* [Moment.js](http://momentjs.com/)
 
 ##License
 
