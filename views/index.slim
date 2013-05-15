@@ -4,8 +4,11 @@ div.game-list
   div.grid data-bind="foreach: games"
     div.unit.no-gutters.one-quarter.game
       div.details
-        p.heavy data-bind="text: datetime"
+        p.heavy data-bind="text: day_of_week"
         p
+          span data-bind="text: date"
+          '  @
+          span data-bind="text: time_of_day"
         p vs.
         p data-bind="text: opponent"
 
@@ -13,9 +16,12 @@ javascript:
   $(document).ready(function(){
     function Game(data) {
       var self = this;
-      self.datetime = data.date_time;
+      self.datetime = moment(data.date_time, "YYYY-MM-DD HH:mm:ss ZZ");
       self.opponent = data.opponent;
       self.id = data.id;
+      self.day_of_week = moment(self.datetime).format("dddd");
+      self.time_of_day = moment(self.datetime).format("hh:mm A") + " EDT";
+      self.date = moment(self.datetime).format("MMMM DD");
     }
 
     function GameViewModel() {
