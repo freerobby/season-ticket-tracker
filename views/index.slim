@@ -7,7 +7,7 @@ div.game-list
         p.heavy data-bind="text: day_of_week"
         p
           span data-bind="text: date"
-          '  @
+        p
           span data-bind="text: time_of_day"
         p vs.
         p data-bind="text: opponent"
@@ -20,7 +20,9 @@ javascript:
       self.opponent = data.opponent;
       self.id = data.id;
       self.day_of_week = moment(self.datetime).format("dddd");
-      self.time_of_day = moment(self.datetime).format("hh:mm A") + " EDT";
+
+      // expected time from server is EDT
+      self.time_of_day = moment(self.datetime).subtract("hours", 1).format("hh:mm A") + " CDT";
       self.date = moment(self.datetime).format("MMMM DD");
     }
 
