@@ -23,7 +23,12 @@ javascript:
       self.day_of_week = self.datetime.format("dddd");
 
       // helper properties
-      self.game_time_text = self.datetime.hour() > 17 ? " (Night)" : " (Day)";
+      self.is_day_game = self.datetime.hour() < 15;
+      self.is_afternoon_game = self.datetime.hour() > 14 && self.datetime.hour() < 17;
+      self.is_night_game = self.datetime.hour() > 16;
+
+      // helper text
+      self.game_time_text = self.is_day_game ? " (Day)" : self.is_afternoon_game ? " (Afternoon)" : " (Night)";
 
       // expected time from server is EDT
       self.time_of_day = moment(self.datetime).subtract("hours", 1).format("hh:mm A") + " CDT";
