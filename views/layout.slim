@@ -19,13 +19,11 @@ html
         nav.unit.two-thirds.hide-on-mobiles.filter-nav
           ul
             li.filter-item
-              a href="/" All
+              a data-bind="click: function(data, event) { filterGames(data, event, 'all'); }" All
             li.filter-item
-              a href="/" Nights
+              a data-bind="click: function(data, event) { filterGames(data, event, 'night') }" Nights
             li.filter-item
-              a href="/" Weekends
-            li.filter-item
-              a href="/" Under $50
+              a data-bind="click: function(data, event) { filterGames(data, event, 'afternoon') }" Afternoon
 
     section.content
       == yield

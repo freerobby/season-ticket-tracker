@@ -1,7 +1,7 @@
 div.quick-view
 
 div.game-list
-  div.grid data-bind="foreach: games"
+  div.grid data-bind="foreach: gamesToShow"
     div.unit.no-gutters.one-quarter.game
       div.details
         p.heavy data-bind="text: day_of_week"
@@ -41,6 +41,32 @@ javascript:
         var games = $.map(raw, function(item) { return new Game(item) });
         self.games(games);
     });
+
+    self.filterGames = function(data, event, type) {
+      if (type == "all")
+        self.typeToShow("all");
+      else if (type == "night")
+        self.typeToShow("night");
+      else if (type == "afternoon")
+      self.typeToShow("afternoon");
+    }
+
+    self.typeToShow = ko.observable("all");
+
+    self.gamesToShow = ko.computed(function() {
+        var desiredType = this.typeToShow();
+        if (desiredType == "all") return this.games();
+        return ko.utils.arrayFilter(this.games(), function(game) {
+            if (desiredType == "day")
+            {
+              return game.is_day_game;
+            } else if (desiredType == "afternoon") {
+              return game.is_afternoon_game;
+            } else if (desiredType == "night") {
+              return game.is_night_game;
+            }
+        });
+    }, self);
   }
 
   $(document).ready(function(){
