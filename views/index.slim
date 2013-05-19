@@ -1,5 +1,17 @@
 div.quick-view
 
+div.game-filters
+  div.grid
+    nav.unit.whole.filter-nav
+      ul
+        li.filter-item
+          a data-bind="click: function(data, event) { filterGames(data, event, 'all'); }" All
+        li.filter-item
+          a data-bind="click: function(data, event) { filterGames(data, event, 'night') }" Nights
+        li.filter-item
+          a data-bind="click: function(data, event) { filterGames(data, event, 'afternoon') }" Afternoon
+
+
 div.game-list
   div.grid data-bind="foreach: gamesToShow"
     div.unit.no-gutters.one-quarter.game

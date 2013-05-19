@@ -46,6 +46,29 @@ nav li {
 nav li a {
   padding: 5px;
   text-decoration: none;
+}
+
+nav li a:hover {
+  cursor: pointer;
+}
+
+.site-nav {
+  margin-top: 30px;
+}
+
+.site-nav li a {
+  border-bottom: 2px solid #c4c9cc;
+}
+
+.site-nav li a:hover {
+  border-bottom: 2px solid #000;
+}
+
+.filter-nav {
+  margin-top: 30px;
+}
+
+.filter-nav li a {
   background-color: #f7f7f7;
   border: 2px solid #c4c9cc;
   -webkit-border-radius: 5px;
@@ -53,12 +76,8 @@ nav li a {
   border-radius: 5px;
 }
 
-nav li a:hover {
+.filter-nav li a:hover {
   background-color: #cecece;
-}
-
-.filter-nav {
-  margin-top: 30px;
 }
 
 .game .details {
