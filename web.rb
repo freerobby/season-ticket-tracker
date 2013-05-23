@@ -52,8 +52,6 @@ class Web < Sinatra::Base
   end
 
   get '/' do
-    results = Game.all
-
     slim :index, :locals => build_view_options("Home", :results => results)
   end
 
