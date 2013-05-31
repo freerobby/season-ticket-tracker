@@ -43,7 +43,7 @@ nav li {
   margin-right: 5px;
 }
 
-nav li a {
+nav li a, nav li span {
   padding: 5px;
   text-decoration: none;
 }
@@ -54,6 +54,10 @@ nav li a:hover {
 
 .site-nav {
   margin-top: 30px;
+}
+
+.site-nav li span {
+  border-bottom: 2px solid #000;
 }
 
 .site-nav li a {

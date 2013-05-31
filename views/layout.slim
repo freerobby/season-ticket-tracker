@@ -19,10 +19,15 @@ html
         nav.unit.two-thirds.hide-on-mobiles.site-nav
           ul
             li.filter-item
-              a href="/" Home
+              - if request.path == "/"
+                span Home
+              - else
+                a href="/" Home
             li.filter-item
-              a href="/about/" About
-
+              - if request.path == "/about/" || request.path == "/about"
+                span About
+              - else
+                a href="/about/" About
     section.content
       == yield
 
