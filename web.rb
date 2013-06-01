@@ -59,7 +59,7 @@ class Web < Sinatra::Base
     slim :about, :locals => build_view_options("About")
   end
 
-  get '/games' do
+  get '/games/?' do
     content_type 'application/json'
 
     results = Game.all
