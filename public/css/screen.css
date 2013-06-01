@@ -84,6 +84,11 @@ nav li a:hover {
   background-color: #cecece;
 }
 
+#game-list-info {
+  margin: 10px;
+  padding: 10px;
+}
+
 .game .details {
   margin: 10px;
   background-color: #d0d4d7;

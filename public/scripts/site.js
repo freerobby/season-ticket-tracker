@@ -25,10 +25,16 @@ function GameViewModel() {
 
   self.games = ko.observableArray([]);
 
+  self.isLoadingOrError = ko.observable(true);
+
   $.getJSON("/games/", function(raw) {
+      self.isLoadingOrError(true);
       var games = $.map(raw, function(item) { return new Game(item) });
       self.games(games);
-  });
+      $('#game-list-info').html("");
+  })
+  .done(function () { self.isLoadingOrError(false); })
+  .fail(function () { $('#game-list-info').html("Error loading the game list."); });
 
   self.typeToShow = ko.observable("all");
 
