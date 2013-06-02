@@ -27,14 +27,17 @@ function GameViewModel() {
 
   self.isLoadingOrError = ko.observable(true);
 
-  $.getJSON("/games/", function(raw) {
-      self.isLoadingOrError(true);
-      var games = $.map(raw, function(item) { return new Game(item) });
-      self.games(games);
-      $('#game-list-info').html("");
-  })
-  .done(function () { self.isLoadingOrError(false); })
-  .fail(function () { $('#game-list-info').html("Error loading the game list."); });
+  self.loadData = function() {
+    self.isLoadingOrError(true);
+
+    $.getJSON("/games/", function(raw) {
+        var games = $.map(raw, function(item) { return new Game(item) });
+        self.games(games);
+        $('#game-list-info').html("");
+    })
+    .done(function () { self.isLoadingOrError(false); })
+    .fail(function () { $('#game-list-info').html("Error loading the game list."); });
+  }
 
   self.typeToShow = ko.observable("all");
 
@@ -65,5 +68,8 @@ function GameViewModel() {
 }
 
 $(document).ready(function(){
-  ko.applyBindings(new GameViewModel());
+  var gameView = new GameViewModel();
+  ko.applyBindings(gameView);
+  gameView.loadData();
+
 });
