@@ -80,6 +80,10 @@ nav li a:hover {
   border-radius: 5px;
 }
 
+.filter-nav li a.selected {
+  background-color: #cecece;
+}
+
 .filter-nav li a:hover {
   background-color: #cecece;
 }

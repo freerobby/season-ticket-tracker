@@ -5,15 +5,17 @@ div.game-filters
     nav.unit.whole.filter-nav
       ul
         li.filter-item
-          a data-bind="click: function(data, event) { filterGames(data, event, 'all'); }" All
+          a data-bind="css: { selected: isAllGameFilterSet }, click: toggleIsAllGameFilter" All
         li.filter-item
-          a data-bind="click: function(data, event) { filterGames(data, event, 'night') }" Nights
+          a data-bind="css: { selected: isDayGameFilterSet }, click: toggleIsDayGameFilter" Day
         li.filter-item
-          a data-bind="click: function(data, event) { filterGames(data, event, 'afternoon') }" Afternoon
+          a data-bind="css: { selected: isNightGameFilterSet }, click: toggleIsNightGameFilter" Night
         li.filter-item
-          a data-bind="click: function(data, event) { filterGames(data, event, 'weekend') }" Weekend
+          a data-bind="css: { selected: isAfternoonGameFilterSet }, click: toggleIsAfternoonGameFilter" Afternoon
         li.filter-item
-          a data-bind="click: function(data, event) { filterGames(data, event, 'weekday') }" Weekday
+          a data-bind="css: { selected: isWeekendGameFilterSet }, click: toggleIsWeekendGameFilter" Weekend
+        li.filter-item
+          a data-bind="css: { selected: isWeekdayGameFilterSet }, click: toggleIsWeekdayGameFilter" Weekday
 
 
 div.game-list

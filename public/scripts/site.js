@@ -27,6 +27,47 @@ function GameViewModel() {
 
   self.isLoadingOrError = ko.observable(true);
 
+  self.isAllGameFilterSet = ko.observable(true);
+  self.isNightGameFilterSet = ko.observable(false);
+  self.isDayGameFilterSet = ko.observable(false);
+  self.isAfternoonGameFilterSet = ko.observable(false);
+  self.isWeekendGameFilterSet = ko.observable(false);
+  self.isWeekdayGameFilterSet = ko.observable(false);
+
+  self.toggleIsAllGameFilter = function () {
+    self.isAllGameFilterSet(!self.isAllGameFilterSet());
+    self.isNightGameFilterSet(false);
+    self.isDayGameFilterSet(false);
+    self.isWeekdayGameFilterSet(false);
+    self.isWeekendGameFilterSet(false);
+    self.isAfternoonGameFilterSet(false);
+  };
+
+  self.toggleIsNightGameFilter = function () {
+    self.isNightGameFilterSet(!self.isNightGameFilterSet())
+    self.isAllGameFilterSet(false);
+  };
+
+  self.toggleIsDayGameFilter = function () {
+    self.isDayGameFilterSet(!self.isDayGameFilterSet());
+    self.isAllGameFilterSet(false);
+  };
+
+  self.toggleIsAfternoonGameFilter = function () {
+    self.isAfternoonGameFilterSet(!self.isAfternoonGameFilterSet());
+    self.isAllGameFilterSet(false);
+  };
+
+  self.toggleIsWeekendGameFilter = function () {
+    self.isWeekendGameFilterSet(!self.isWeekendGameFilterSet());
+    self.isAllGameFilterSet(false);
+  };
+
+  self.toggleIsWeekdayGameFilter = function () {
+    self.isWeekdayGameFilterSet(!self.isWeekdayGameFilterSet());
+    self.isAllGameFilterSet(false);
+  };
+
   self.loadData = function() {
     self.isLoadingOrError(true);
 
@@ -39,28 +80,23 @@ function GameViewModel() {
     .fail(function () { $('#game-list-info').html("Error loading the game list."); });
   }
 
-  self.typeToShow = ko.observable("all");
-
-  self.filterGames = function(data, event, type) {
-      self.typeToShow(type);
-  }
-
   self.gamesToShow = ko.computed(function() {
-      var desiredType = this.typeToShow();
-
-      if (desiredType == "all") return this.games();
+      if (self.isAllGameFilterSet())
+      {
+        return this.games();
+      }
 
       return ko.utils.arrayFilter(this.games(), function(game) {
-          if (desiredType == "day")
+          if (self.isDayGameFilterSet())
           {
             return game.is_day_game;
-          } else if (desiredType == "afternoon") {
+          } else if (self.isAfternoonGameFilterSet()) {
             return game.is_afternoon_game;
-          } else if (desiredType == "night") {
+          } else if (self.isNightGameFilterSet()) {
             return game.is_night_game;
-          } else if (desiredType == "weekend") {
+          } else if (self.isWeekendGameFilterSet()) {
             return game.is_weekend_game;
-          } else if (desiredType == "weekday") {
+          } else if (self.isWeekdayGameFilterSet()) {
             return game.is_weekday_game;
           }
       });
