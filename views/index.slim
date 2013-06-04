@@ -2,7 +2,7 @@ div.quick-view
 
 div.game-filters
   div.grid
-    nav.unit.whole.filter-nav
+    nav.unit.three-quarters.filter-nav
       ul
         li.filter-item
           a data-bind="css: { selected: isAllGameFilterSet }, click: toggleIsAllGameFilter" All
@@ -16,7 +16,8 @@ div.game-filters
           a data-bind="css: { selected: isWeekendGameFilterSet }, click: toggleIsWeekendGameFilter" Weekend
         li.filter-item
           a data-bind="css: { selected: isWeekdayGameFilterSet }, click: toggleIsWeekdayGameFilter" Weekday
-
+    nav.unit.one-quarter
+      div data-bind="text: numGamesText()"
 
 div.game-list
   div.grid data-bind="visible: isLoadingOrError"

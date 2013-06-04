@@ -121,6 +121,10 @@ function GameViewModel() {
           }
       });
   }, self);
+
+  self.numGamesText = ko.computed(function() {
+    return self.gamesToShow().length + " Games";
+  }, self);
 }
 
 $(document).ready(function(){
