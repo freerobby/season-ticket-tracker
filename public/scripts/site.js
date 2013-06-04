@@ -46,26 +46,46 @@ function GameViewModel() {
   self.toggleIsNightGameFilter = function () {
     self.isNightGameFilterSet(!self.isNightGameFilterSet())
     self.isAllGameFilterSet(false);
+    self.isDayGameFilterSet(false);
+    self.isWeekdayGameFilterSet(false);
+    self.isWeekendGameFilterSet(false);
+    self.isAfternoonGameFilterSet(false);
   };
 
   self.toggleIsDayGameFilter = function () {
     self.isDayGameFilterSet(!self.isDayGameFilterSet());
     self.isAllGameFilterSet(false);
+    self.isNightGameFilterSet(false);
+    self.isWeekdayGameFilterSet(false);
+    self.isWeekendGameFilterSet(false);
+    self.isAfternoonGameFilterSet(false);
   };
 
   self.toggleIsAfternoonGameFilter = function () {
     self.isAfternoonGameFilterSet(!self.isAfternoonGameFilterSet());
     self.isAllGameFilterSet(false);
+    self.isNightGameFilterSet(false);
+    self.isDayGameFilterSet(false);
+    self.isWeekdayGameFilterSet(false);
+    self.isWeekendGameFilterSet(false);
   };
 
   self.toggleIsWeekendGameFilter = function () {
     self.isWeekendGameFilterSet(!self.isWeekendGameFilterSet());
     self.isAllGameFilterSet(false);
+    self.isNightGameFilterSet(false);
+    self.isDayGameFilterSet(false);
+    self.isWeekdayGameFilterSet(false);
+    self.isAfternoonGameFilterSet(false);
   };
 
   self.toggleIsWeekdayGameFilter = function () {
     self.isWeekdayGameFilterSet(!self.isWeekdayGameFilterSet());
     self.isAllGameFilterSet(false);
+    self.isNightGameFilterSet(false);
+    self.isDayGameFilterSet(false);
+    self.isWeekendGameFilterSet(false);
+    self.isAfternoonGameFilterSet(false);
   };
 
   self.loadData = function() {
