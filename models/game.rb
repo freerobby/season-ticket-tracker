@@ -1,15 +1,19 @@
 class Game < Sequel::Model(:games)
 
   def self.all
-    Game
+    Game.order(:date_time)
   end
 
   def self.active_games
-    Game.where(:active => true)
+    Game.where(:active => true).order(:date_time)
   end
 
   def self.inactive_games
     Game.where(:active => false)
+  end
+
+  def self.set_game_active_status(id, status)
+    Game.where(:id => id).update(:active => status, :last_updated => Time.new)
   end
 
   def self.retrieve_by_id(id)

@@ -79,6 +79,14 @@ class Web < Sinatra::Base
     Game.all.to_json
   end
 
+  post '/game/:id/set/:active' do
+    active = params[:active].downcase.eql?("active")
+
+    Game.set_game_active_status(params[:id], active)
+
+    status 200
+  end
+
   Sequel::Model.plugin :json_serializer
 
   # require model classes

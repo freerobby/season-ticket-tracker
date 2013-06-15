@@ -2,8 +2,9 @@ function Game(data) {
   var self = this;
   self.datetime = moment(data.date_time, "YYYY-MM-DD HH:mm:ss ZZ");
   self.opponent = data.opponent;
-  self.id = data.id;
+  self.game_id = data.id;
   self.day_of_week = self.datetime.format("dddd");
+  self.active = ko.observable(data.active ? true : false);
 
   // helper properties
   self.is_day_game = self.datetime.hour() < 15;
@@ -127,4 +128,20 @@ function GameViewModel(gamesURL) {
   self.numGamesText = ko.computed(function() {
     return self.gamesToShow().length + " Games";
   }, self);
+
+  self.toggleActiveStatus = function(game) {
+    var currValue = game.active();
+
+    game.active(!currValue);
+
+    var activeStatus = game.active() ? "active" : "inactive";
+
+    $.post("/game/" + game.game_id + "/set/" + activeStatus)
+    .fail(function (){
+      // TODO: throw status that the action didn't save
+
+      //reset back to previous value
+      game.active(currValue);
+    })
+  }
 }

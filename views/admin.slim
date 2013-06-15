@@ -23,7 +23,7 @@ div.game-list
       | Loading...
   div.grid data-bind="foreach: gamesToShow"
     div.unit.no-gutters.one-quarter.game
-      div.details
+      div.details data-bind="css: {active: active}"
         p.heavy data-bind="text: day_of_week"
         p
           span data-bind="text: date"
@@ -32,6 +32,8 @@ div.game-list
           span data-bind="text: game_time_text"
         p vs.
         p data-bind="text: opponent"
+        div.actions
+           button data-bind="click: $parent.toggleActiveStatus" Toggle Status
 
 javascript:
   $(document).ready(function(){

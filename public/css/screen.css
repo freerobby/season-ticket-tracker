@@ -109,6 +109,10 @@ nav li a:hover {
   border-radius: 5px;
 }
 
+.game .active {
+  background-color: #2ecc71;
+}
+
 .game .details p.heavy {
   font-size:20px;
   font-weight: bold;
