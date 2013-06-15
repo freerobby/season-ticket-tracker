@@ -1,7 +1,15 @@
 class Game < Sequel::Model(:games)
 
   def self.all
+    Game
+  end
+
+  def self.active_games
     Game.where(:active => true)
+  end
+
+  def self.inactive_games
+    Game.where(:active => false)
   end
 
   def self.retrieve_by_id(id)

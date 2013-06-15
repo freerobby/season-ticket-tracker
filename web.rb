@@ -13,10 +13,12 @@ class Web < Sinatra::Base
   set :base_app_title, "Season Ticket Tracker"
   set :config_opts, YAML::load_file(File.join(settings.base_directory, CONFIG_FILE))
 
-  def build_view_options(title, rest={})
+  def build_view_options(title, admin=false, rest={})
     view_options = Hash.new
 
     view_options.store(:title, "#{settings.base_app_title} | #{title}")
+
+    view_options.store(:admin, admin)
 
     if !rest.nil?
       view_options.merge!(rest)
@@ -59,12 +61,22 @@ class Web < Sinatra::Base
     slim :about, :locals => build_view_options("About")
   end
 
+  get '/admin/?' do
+    slim :admin, :locals => build_view_options("Administration", true)
+  end
+
   get '/games/?' do
     content_type 'application/json'
 
-    results = Game.all
+    results = Game.active_games
 
     results.to_json
+  end
+
+  get '/games/all/?' do
+    content_type 'application/json'
+
+    Game.all.to_json
   end
 
   Sequel::Model.plugin :json_serializer

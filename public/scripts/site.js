@@ -20,8 +20,10 @@ function Game(data) {
   self.date = self.datetime.format("MMMM DD");
 }
 
-function GameViewModel() {
+function GameViewModel(gamesURL) {
   var self = this;
+
+  self.gamesURL = gamesURL;
 
   self.games = ko.observableArray([]);
 
@@ -91,7 +93,7 @@ function GameViewModel() {
   self.loadData = function() {
     self.isLoadingOrError(true);
 
-    $.getJSON("/games/", function(raw) {
+    $.getJSON(self.gamesURL, function(raw) {
         var games = $.map(raw, function(item) { return new Game(item) });
         self.games(games);
         $('#game-list-info').html("");
@@ -126,10 +128,3 @@ function GameViewModel() {
     return self.gamesToShow().length + " Games";
   }, self);
 }
-
-$(document).ready(function(){
-  var gameView = new GameViewModel();
-  ko.applyBindings(gameView);
-  gameView.loadData();
-
-});
