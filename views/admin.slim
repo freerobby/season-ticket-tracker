@@ -32,8 +32,9 @@ div.game-list
           span data-bind="text: game_time_text"
         p vs.
         p data-bind="text: opponent"
+        
         div.actions
-           button data-bind="click: $parent.toggleActiveStatus" Toggle Status
+           a.button.button-block href="" data-bind="click: $parent.toggleActiveStatus" Toggle Status
 
 javascript:
   $(document).ready(function(){
