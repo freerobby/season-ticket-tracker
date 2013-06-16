@@ -97,9 +97,17 @@ function GameViewModel(gamesURL) {
     $.getJSON(self.gamesURL, function(raw) {
         var games = $.map(raw, function(item) { return new Game(item) });
         self.games(games);
-        $('#game-list-info').html("");
     })
-    .done(function () { self.isLoadingOrError(false); })
+    .done(function () {
+      if (self.games().length == 0)
+      {
+        $('#game-list-info').html("No games were found.");
+      } else {
+        $('#game-list-info').html("");
+        self.isLoadingOrError(false);
+      }
+
+    })
     .fail(function () { $('#game-list-info').html("Error loading the game list."); });
   }
 

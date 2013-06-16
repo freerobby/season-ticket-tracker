@@ -95,6 +95,7 @@ nav li a:hover {
 #game-list-info {
   margin: 10px;
   padding: 10px;
+  text-align: center;
 }
 
 .game .details {
