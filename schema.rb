@@ -17,6 +17,7 @@ Sequel.connect(configopts["dbopts"]) do |db|
       String :description
       DateTime :date_time
       DateTime :last_updated
+      DateTime :created
       Boolean :active
     end
 
