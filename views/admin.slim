@@ -1,3 +1,14 @@
+div.season-stats
+  div.grid
+    nav.unit.half.left-stats
+      span data-bind="text: activeGamesText"
+      br
+      span data-bind="text: activeDayGamesCountText"
+      br
+      span data-bind="text: activeAfternoonGamesCountText"
+      br
+      span data-bind="text: activeNightGamesCountText"
+    nav.unit.half.right-stats
 div.game-filters
   div.grid
     nav.unit.three-quarters.filter-nav
@@ -32,7 +43,7 @@ div.game-list
           span data-bind="text: game_time_text"
         p vs.
         p data-bind="text: opponent"
-        
+
         div.actions
            a.button.button-block href="" data-bind="click: $parent.toggleActiveStatus" Toggle Status
 

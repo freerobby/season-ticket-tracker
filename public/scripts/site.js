@@ -137,6 +137,42 @@ function GameViewModel(gamesURL) {
     return self.gamesToShow().length + " Games";
   }, self);
 
+  self.activeGamesText = ko.computed(function() {
+    var activeGames = ko.utils.arrayFilter(self.games(), function(item)
+    {
+        return item.active();
+    });
+
+    return "Active Games: " + activeGames.length;
+  });
+
+  self.activeDayGamesCountText = ko.computed(function() {
+    var activeGames = ko.utils.arrayFilter(self.games(), function(item)
+    {
+        return item.active() && item.is_day_game;
+    });
+
+    return "Active Day Games: " + activeGames.length;
+  });
+
+  self.activeAfternoonGamesCountText = ko.computed(function() {
+    var activeGames = ko.utils.arrayFilter(self.games(), function(item)
+    {
+        return item.active() && item.is_afternoon_game;
+    });
+
+    return "Active Afternoon Games: " + activeGames.length;
+  });
+
+  self.activeNightGamesCountText = ko.computed(function() {
+    var activeGames = ko.utils.arrayFilter(self.games(), function(item)
+    {
+        return item.active() && item.is_night_game;
+    });
+
+    return "Active Night Games: " + activeGames.length;
+  });
+
   self.toggleActiveStatus = function(game) {
     var currValue = game.active();
 
