@@ -1,4 +1,5 @@
 class Game < Sequel::Model(:games)
+  many_to_one :teams
 
   def self.all
     Game.order(:date_time)
@@ -20,8 +21,8 @@ class Game < Sequel::Model(:games)
     Game.where(:id => id)
   end
 
-  def self.insert_new(opponent, stadium, description, date_time)
-    Game.insert(:opponent => opponent, :stadium => stadium, :description => description, :date_time => date_time, :last_updated => Time.new, :created => Time.new, :active => false)
+  def self.insert_new(team_id, opponent, stadium, description, date_time)
+    Game.insert(:team_id => team_id, :opponent => opponent, :stadium => stadium, :description => description, :date_time => date_time, :last_updated => Time.new, :created => Time.new, :active => false)
   end
 
   def self.clear

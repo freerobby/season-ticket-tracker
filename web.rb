@@ -65,6 +65,14 @@ class Web < Sinatra::Base
     slim :admin, :locals => build_view_options("Administration", true)
   end
 
+  # api methods
+
+  get '/seasons/:team_id/?' do
+    content_type 'application/json'
+
+    Season.active_seasons(params[:team_id]).to_json
+  end
+
   get '/games/?' do
     content_type 'application/json'
 
