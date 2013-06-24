@@ -1,23 +1,14 @@
-class Team < Sequel::Model(:teams)
-  one_to_many :seasons
-  one_to_many :games
+class Team
 
-  #### SCHEMA
-  #primary_key :id
-  #String :name
-  #String :stadium
-  #String :city
-  #String :state
-  #DateTime :last_updated
-  #DateTime :created
-  #Boolean :active
+  include DataMapper::Resource
 
-  def self.active_teams
-    Team.where(:active => true)
-  end
+  property :id,         Serial
+  property :name,       String
+  property :stadium,    String
+  property :city,       String
+  property :state,      String
+  property :created_at, DateTime
 
-  def self.insert_new(name, stadium, city, state)
-    Team.insert(:name => name, :stadium => stadium, :city => city, :state => state, :last_updated => Time.new, :created => Time.new, :active => true)
-  end
+  has n, :seasons
 
 end

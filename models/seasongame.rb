@@ -1,7 +1,11 @@
-class SeasonGame < Sequel::Model(:seasongames)
+class SeasonGame
 
-  def self.insert_season_game_assoc(season_id, game_id)
-    SeasonGame.insert(:season_id => season_id, :game_id => game_id)
-  end
+  include DataMapper::Resource
+
+  property :id,         Serial
+  property :created_at, DateTime
+
+  belongs_to :season
+  belongs_to :game
 
 end

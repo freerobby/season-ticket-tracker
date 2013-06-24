@@ -1,32 +1,15 @@
-class Game < Sequel::Model(:games)
-  many_to_one :teams
+class Game
 
-  def self.all
-    Game.order(:date_time)
-  end
+  include DataMapper::Resource
 
-  def self.active_games
-    Game.where(:active => true).order(:date_time)
-  end
+  property :id,           Serial
+  property :opponent,     String
+  property :location,     String
+  property :description,  Text
+  property :gametime,     DateTime
+  property :created_at,   DateTime
 
-  def self.inactive_games
-    Game.where(:active => false)
-  end
-
-  def self.set_game_active_status(id, status)
-    Game.where(:id => id).update(:active => status, :last_updated => Time.new)
-  end
-
-  def self.retrieve_by_id(id)
-    Game.where(:id => id)
-  end
-
-  def self.insert_new(team_id, opponent, stadium, description, date_time)
-    Game.insert(:team_id => team_id, :opponent => opponent, :stadium => stadium, :description => description, :date_time => date_time, :last_updated => Time.new, :created => Time.new, :active => false)
-  end
-
-  def self.clear
-    Game.delete
-  end
+  has n, :season_games
+  has n, :seasons,      :through => :season_games
 
 end

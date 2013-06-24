@@ -69,6 +69,7 @@ If you want to use a different year or team, you will have to change the class b
 
 The following is a list of open-source components used:
 
+* [DataMapper] (http://datamapper.org/)
 * [Normalize.css](http://necolas.github.io/normalize.css/)
 * [Gridism](http://cobyism.com/gridism/)
 * [jQuery](http://jquery.com/)

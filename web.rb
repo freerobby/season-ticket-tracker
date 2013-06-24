@@ -50,7 +50,9 @@ class Web < Sinatra::Base
   end
 
   configure do
-    DB = Sequel.connect(settings.config_opts[DB_CONFIG_KEY])
+    #DB = Sequel.connect(settings.config_opts[DB_CONFIG_KEY])
+
+    DataMapper.setup(:default, 'postgres://localhost:5432/stt')
   end
 
   get '/' do
@@ -70,32 +72,32 @@ class Web < Sinatra::Base
   get '/seasons/:team_id/?' do
     content_type 'application/json'
 
-    Season.active_seasons(params[:team_id]).to_json
+    #Season.active_seasons(params[:team_id]).to_json
   end
 
   get '/games/?' do
     content_type 'application/json'
 
-    results = Game.active_games
+    #results = Game.active_games
 
-    results.to_json
+    #results.to_json
   end
 
   get '/games/all/?' do
     content_type 'application/json'
 
-    Game.all.to_json
+    #Game.all.to_json
   end
 
   post '/game/:id/set/:active' do
     active = params[:active].downcase.eql?("active")
 
-    Game.set_game_active_status(params[:id], active)
+    #Game.set_game_active_status(params[:id], active)
 
     status 200
   end
 
-  Sequel::Model.plugin :json_serializer
+  #Sequel::Model.plugin :json_serializer
 
   # require model classes
   Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }

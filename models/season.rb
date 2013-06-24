@@ -1,20 +1,14 @@
-class Season < Sequel::Model(:seasons)
-  many_to_one :teams
+class Season
 
-  #### SCHEMA
-  #primary_key :id
-  #foreign_key :team_id, :teams
-  #Integer :year
-  #DateTime :last_updated
-  #DateTime :created
-  #Boolean :active
+  include DataMapper::Resource
 
-  def self.active_seasons(team_id)
-    Season.where(:active => true, :team_id => team_id)
-  end
+  property :id,         Serial
+  property :year,       Integer
+  property :created_at, DateTime
 
-  def self.insert_new(team_id, year)
-    Season.insert(:team_id => team_id, :year => year, :last_updated => Time.new, :created => Time.new, :active => true)
-  end
+  belongs_to :team
+  
+  has n, :season_games
+  has n, :games,      :through => :season_games
 
 end
