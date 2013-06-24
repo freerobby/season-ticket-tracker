@@ -50,9 +50,7 @@ class Web < Sinatra::Base
   end
 
   configure do
-    #DB = Sequel.connect(settings.config_opts[DB_CONFIG_KEY])
-
-    DataMapper.setup(:default, 'postgres://localhost:5432/stt')
+    DataMapper.setup(:default, settings.config_opts[DB_CONFIG_KEY])
   end
 
   get '/' do

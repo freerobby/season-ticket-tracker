@@ -12,25 +12,33 @@ require 'mlbschedules'
 require 'dm-migrations'
 require 'data_mapper'
 
-#configopts = YAML::load_file(File.join(File.dirname(__FILE__), "config.yml"))
+# get the db config options
+CONFIG_FILE = "config.yml"
+DB_CONFIG_KEY = "dbopts"
+configopts = YAML::load_file(File.join(File.dirname(__FILE__), CONFIG_FILE))
 
-DataMapper.setup(:default, 'postgres://localhost:5432/stt')
+# create datamapper instance
+DataMapper.setup(:default, configopts[DB_CONFIG_KEY])
 
-Dir[File.dirname(__FILE__) + '/models/*.rb'].each { |file| require file }
+# include all of the modesl
+Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file}
 
+# check that the models are correct before inserting
 DataMapper.finalize
+
+# migrate any changes to the tables (schema can handle later)
 DataMapper.auto_migrate!
 
+# to handle global model save errors
 #DataMapper::Model.raise_on_save_failure = true
 
-# need to require after setting up db connection
-Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }
-
+# get the schedule information using mlbschedules gem
 cubs_sched = MLBSchedules::Schedule.new(112, 2013, true, true)
 csv = cubs_sched.request_csv
 games = cubs_sched.parse_csv(csv)
 
-team = Team.create(:name => "CC", :stadium => "C", :city => "city", :state => "state", :created_at => Time.new)
+# create team
+team = Team.create(:name => "Chicago Cubs", :stadium => "Wrigley Field", :city => "Chicago", :state => "Illinois", :created_at => Time.new)
 
 puts "Created Team ID: #{team.id}"
 
