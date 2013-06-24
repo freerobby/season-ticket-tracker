@@ -1,5 +1,6 @@
 require 'yaml'
 require 'json'
+require 'dm-serializer'
 
 class Web < Sinatra::Base
   CONFIG_FILE = "config.yml"
@@ -69,16 +70,17 @@ class Web < Sinatra::Base
 
   get '/seasons/:team_id/?' do
     content_type 'application/json'
+    status 200
 
-    #Season.active_seasons(params[:team_id]).to_json
+    Team.all(:id => params[:team_id])
+        .to_json(methods: [:seasons])
   end
 
   get '/games/?' do
     content_type 'application/json'
 
-    #results = Game.active_games
-
-    #results.to_json
+    Game.all.seasons.all(:year => 2013)
+        .to_json(methods: [:games])
   end
 
   get '/games/all/?' do
@@ -94,8 +96,6 @@ class Web < Sinatra::Base
 
     status 200
   end
-
-  #Sequel::Model.plugin :json_serializer
 
   # require model classes
   Dir[File.dirname(__FILE__) + '/models/*.rb'].each {|file| require file }
