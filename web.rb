@@ -68,25 +68,11 @@ class Web < Sinatra::Base
 
   # api methods
 
-  get '/seasons/:team_id/?' do
-    content_type 'application/json'
-    status 200
-
-    Team.all(:id => params[:team_id])
-        .to_json(methods: [:seasons])
-  end
-
-  get '/games/?' do
-    content_type 'application/json'
-
-    Game.all.seasons.all(:year => 2013)
-        .to_json(methods: [:games])
-  end
-
   get '/games/all/?' do
     content_type 'application/json'
 
-    #Game.all.to_json
+    Season.all(:year => 2013)
+          .to_json(methods: [:games])
   end
 
   post '/game/:id/set/:active' do

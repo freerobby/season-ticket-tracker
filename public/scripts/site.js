@@ -1,6 +1,16 @@
+function Season(data) {
+  var self = this;
+
+  self.id = data.id;
+  self.year = data.year;
+  self.created_at = data.created_at;
+
+  self.games = $.map(data.games, function(item) { return new Game(item) });
+}
+
 function Game(data) {
   var self = this;
-  self.datetime = moment(data.date_time, "YYYY-MM-DD HH:mm:ss ZZ");
+  self.datetime = moment(data.gametime, "YYYY-MM-DD HH:mm:ss ZZ");
   self.opponent = data.opponent;
   self.game_id = data.id;
   self.day_of_week = self.datetime.format("dddd");
@@ -21,7 +31,7 @@ function Game(data) {
   self.date = self.datetime.format("MMMM DD");
 }
 
-function GameViewModel(gamesURL) {
+function ViewModel(gamesURL) {
   var self = this;
 
   self.gamesURL = gamesURL;
@@ -95,8 +105,8 @@ function GameViewModel(gamesURL) {
     self.isLoadingOrError(true);
 
     $.getJSON(self.gamesURL, function(raw) {
-        var games = $.map(raw, function(item) { return new Game(item) });
-        self.games(games);
+        var seasons = $.map(raw, function(item) { return new Season(item) });
+        self.games(seasons[0].games);
     })
     .done(function () {
       if (self.games().length == 0)
