@@ -68,6 +68,10 @@ class Web < Sinatra::Base
 
   # api methods
 
+  get '/game/:id/?' do
+    #SeasonGame.all(:active => true, :game => { :id => params[:id]}).to_json
+  end
+
   get '/games/all/?' do
     content_type 'application/json'
 
@@ -78,9 +82,15 @@ class Web < Sinatra::Base
   post '/game/:id/set/:active' do
     active = params[:active].downcase.eql?("active")
 
-    #Game.set_game_active_status(params[:id], active)
+    game = SeasonGame.all(:game => {:id => params[:id]})[0]
+    game.active = false
+    saved = game.save
 
-    status 200
+    if saved
+      status 200
+    else
+      status 424
+    end
   end
 
   # require model classes
