@@ -51,6 +51,7 @@ class Web < Sinatra::Base
   end
 
   configure do
+    #DataMapper::Logger.new(STDOUT, :debug)
     DataMapper.setup(:default, settings.config_opts[DB_CONFIG_KEY])
   end
 
@@ -72,18 +73,47 @@ class Web < Sinatra::Base
     #SeasonGame.all(:active => true, :game => { :id => params[:id]}).to_json
   end
 
-  get '/games/all/?' do
+  get '/games/:year/?' do
     content_type 'application/json'
 
-    Season.all(:year => 2013)
-          .to_json(methods: [:games])
+    year = params[:year]
+
+    season_data = SeasonGame.all(:active => true, :season => { :year => year }).games
+
+    season_data.to_json
+  end
+
+  get '/games/:year/all/?' do
+    content_type 'application/json'
+
+    year = params[:year]
+
+    games_data = SeasonGame.all(:season => { :year => year })
+
+    return_data = Array.new
+
+    games_data.each do |season_game|
+      game_data = Hash.new
+
+      game_data[:active] = season_game.active
+      game_data[:id] = season_game.game.id
+      game_data[:opponent] = season_game.game.opponent
+      game_data[:location] = season_game.game.location
+      game_data[:description] = season_game.game.description
+      game_data[:gametime] = season_game.game.gametime
+      game_data[:created_at] = season_game.game.created_at
+
+      return_data.push(game_data)
+    end
+
+    return_data.to_json
   end
 
   post '/game/:id/set/:active' do
     active = params[:active].downcase.eql?("active")
 
-    game = SeasonGame.all(:game => {:id => params[:id]})[0]
-    game.active = false
+    game = SeasonGame.first(:game => {:id => params[:id]})
+    game.active = active
     saved = game.save
 
     if saved

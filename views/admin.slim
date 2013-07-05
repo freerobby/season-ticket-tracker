@@ -49,7 +49,7 @@ div.game-list
 
 javascript:
   $(document).ready(function(){
-    var gameView = new ViewModel("/games/all/");
+    var gameView = new ViewModel("/games/2013/all/");
     ko.applyBindings(gameView);
     gameView.loadData();
   });

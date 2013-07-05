@@ -105,8 +105,11 @@ function ViewModel(gamesURL) {
     self.isLoadingOrError(true);
 
     $.getJSON(self.gamesURL, function(raw) {
-        var seasons = $.map(raw, function(item) { return new Season(item) });
-        self.games(seasons[0].games);
+        //var seasons = $.map(raw, function(item) { return new Season(item) });
+        //self.games(seasons[0].games);
+
+        var games = $.map(raw, function(item) { return new Game(item) });
+        self.games(games);
     })
     .done(function () {
       if (self.games().length == 0)
