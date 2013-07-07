@@ -188,6 +188,24 @@ function ViewModel(gamesURL) {
     return "Active Night Games: " + activeGames.length;
   });
 
+  self.soldGamesText = ko.computed(function() {
+    var soldGames = ko.utils.arrayFilter(self.games(), function(item)
+    {
+        return item.sold();
+    });
+
+    return "Sold Games: " + soldGames.length;
+  });
+
+  self.usedGamesText = ko.computed(function() {
+    var usedGames = ko.utils.arrayFilter(self.games(), function(item)
+    {
+        return item.used();
+    });
+
+    return "Used Games: " + usedGames.length;
+  });
+
   self.toggleActiveStatus = function(game) {
     var currValue = game.active();
 
