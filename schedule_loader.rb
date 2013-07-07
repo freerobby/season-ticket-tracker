@@ -49,7 +49,7 @@ puts "Created Season ID: #{season.id}"
 games.each do |game|
   newgame = Game.create(:opponent => game.opponent, :location => game.location, :description => game.description, :gametime => game.datetime)
 
-  SeasonGame.create(:game => newgame, :season => season, :active => false)
+  SeasonGame.create(:game => newgame, :season => season, :active => false, :sold => false, :used => false)
 end
 
 puts "Created #{games.count} Games"

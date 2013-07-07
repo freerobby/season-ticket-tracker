@@ -95,6 +95,8 @@ class Web < Sinatra::Base
     games_data.each do |season_game|
       game_data = Hash.new
 
+      game_data[:used] = season_game.used
+      game_data[:sold] = season_game.sold
       game_data[:active] = season_game.active
       game_data[:id] = season_game.game.id
       game_data[:opponent] = season_game.game.opponent
@@ -114,6 +116,34 @@ class Web < Sinatra::Base
 
     game = SeasonGame.first(:game => {:id => params[:id]})
     game.active = active
+    saved = game.save
+
+    if saved
+      status 200
+    else
+      status 424
+    end
+  end
+
+  post '/game/:id/set/sold/:status' do
+    sold = params[:status].downcase.eql?("sold")
+
+    game = SeasonGame.first(:game => {:id => params[:id]})
+    game.sold = sold
+    saved = game.save
+
+    if saved
+      status 200
+    else
+      status 424
+    end
+  end
+
+  post '/game/:id/set/used/:status' do
+    used = params[:status].downcase.eql?("used")
+
+    game = SeasonGame.first(:game => {:id => params[:id]})
+    game.used = used
     saved = game.save
 
     if saved

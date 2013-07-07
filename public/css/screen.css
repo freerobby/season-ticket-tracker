@@ -131,6 +131,11 @@ footer p {
   font-size: 15px;
 }
 
+.actions {
+  margin-top:10px;
+
+}
+
 .button {
   border: none;
   background: #2c81ba;
@@ -153,5 +158,8 @@ footer p {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+a.button.sold { background-color: #E74C3C; }
+a.button.used { background-color: #E74C3C; }
 
 a.button:hover { background-color: #3498db; }

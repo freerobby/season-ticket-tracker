@@ -15,6 +15,8 @@ function Game(data) {
   self.game_id = data.id;
   self.day_of_week = self.datetime.format("dddd");
   self.active = ko.observable(data.active ? true : false);
+  self.sold = ko.observable(data.sold ? true : false);
+  self.used = ko.observable(data.used ? true : false);
 
   // helper properties
   self.is_day_game = self.datetime.hour() < 15;
@@ -199,6 +201,38 @@ function ViewModel(gamesURL) {
 
       //reset back to previous value
       game.active(currValue);
+    })
+  }
+
+  self.toggleUsedStatus = function(game) {
+    var currValue = game.used();
+
+    game.used(!currValue);
+
+    var usedStatus = game.used() ? "used" : "unused";
+
+    $.post("/game/" + game.game_id + "/set/used/" + usedStatus)
+    .fail(function (){
+      // TODO: throw status that the action didn't save
+
+      //reset back to previous value
+      game.used(currValue);
+    })
+  }
+
+  self.toggleSoldStatus = function(game) {
+    var currValue = game.sold();
+
+    game.sold(!currValue);
+
+    var soldStatus = game.sold() ? "sold" : "unsold";
+
+    $.post("/game/" + game.game_id + "/set/sold/" + soldStatus)
+    .fail(function (){
+      // TODO: throw status that the action didn't save
+
+      //reset back to previous value
+      game.sold(currValue);
     })
   }
 }
