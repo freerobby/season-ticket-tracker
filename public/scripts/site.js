@@ -10,8 +10,12 @@ function Season(data) {
 
 function Game(data) {
   var self = this;
+
+  if (!data) return;
+
   self.datetime = moment(data.gametime, "YYYY-MM-DD HH:mm:ss ZZ");
   self.opponent = data.opponent;
+  self.location = data.location;
   self.game_id = data.id;
   self.day_of_week = self.datetime.format("dddd");
   self.active = ko.observable(data.active ? true : false);

@@ -1,11 +1,25 @@
-div.season-stats
 div.grid
   nav.unit.half
-    | Game ID: #{game.id}
+    ' Game ID:
+    span data-bind="text: game().game_id"
     br
-    | Game Opponent: #{game.opponent}
+    ' Game Location:
+    span data-bind="text: game().location"
     br
-    | Game Location: #{game.location}
+    ' Game Opponent:
+    span data-bind="text: game().opponent"
     br
-    | Game Date/Time: #{game.gametime}
+    ' Game Date/Time:
+    span data-bind="text: game().datetime"
+  nav.unit.half
+    div
+       a.button href="" data-bind="css: { active: game().active }, click: toggleActiveStatus" Active
+       a.button href="" data-bind="css: { used: game().used }, click: toggleUsedStatus" Used
+       a.button href="" data-bind="css: { sold: game().sold }, click: toggleSoldStatus" Sold
 
+javascript:
+  $(document).ready(function(){
+    var gameView = new GameViewModel("/game/1/");
+    ko.applyBindings(gameView);
+    gameView.loadData();
+  });

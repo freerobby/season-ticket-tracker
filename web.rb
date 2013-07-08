@@ -68,16 +68,27 @@ class Web < Sinatra::Base
   end
   
   get '/admin/game/:id/?' do
-    vals = Hash.new
-    vals[:game] = SeasonGame.first(:game => {:id => params[:id]}).game
-    
-    slim :game, :locals => build_view_options("Game", true, vals)
+    slim :game, :locals => build_view_options("Game", true)
   end
 
   # api methods
 
   get '/game/:id/?' do
-    #SeasonGame.all(:active => true, :game => { :id => params[:id]}).to_json
+    season_game = SeasonGame.first(:game => {:id => params[:id]})
+    
+    game_data = Hash.new
+    
+    game_data[:used] = season_game.used
+    game_data[:sold] = season_game.sold
+    game_data[:active] = season_game.active
+    game_data[:id] = season_game.game.id
+    game_data[:opponent] = season_game.game.opponent
+    game_data[:location] = season_game.game.location
+    game_data[:description] = season_game.game.description
+    game_data[:gametime] = season_game.game.gametime
+    game_data[:created_at] = season_game.game.created_at
+    
+    game_data.to_json
   end
 
   get '/games/:year/?' do

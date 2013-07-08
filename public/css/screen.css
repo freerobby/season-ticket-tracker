@@ -159,6 +159,7 @@ footer p {
   box-sizing: border-box;
 }
 
+a.button.active { background-color: #E74C3C; }
 a.button.sold { background-color: #E74C3C; }
 a.button.used { background-color: #E74C3C; }
 
