@@ -66,6 +66,13 @@ class Web < Sinatra::Base
   get '/admin/?' do
     slim :admin, :locals => build_view_options("Administration", true)
   end
+  
+  get '/admin/game/:id/?' do
+    vals = Hash.new
+    vals[:game] = SeasonGame.first(:game => {:id => params[:id]}).game
+    
+    slim :game, :locals => build_view_options("Game", true, vals)
+  end
 
   # api methods
 

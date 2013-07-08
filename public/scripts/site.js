@@ -27,6 +27,7 @@ function Game(data) {
 
   // helper text
   self.game_time_text = self.is_day_game ? " (Day)" : self.is_afternoon_game ? " (Afternoon)" : " (Night)";
+  self.gameURL = "/admin/game/" + self.game_id + "/";
 
   // expected time from server is EDT
   self.time_of_day = moment(self.datetime).subtract("hours", 1).format("hh:mm A") + " CDT";

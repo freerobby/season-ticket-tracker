@@ -52,6 +52,7 @@ div.game-list
         div.actions
            a.button href="" data-bind="css: { used: used }, click: $parent.toggleUsedStatus" Used
            a.button href="" data-bind="css: { sold: sold }, click: $parent.toggleSoldStatus" Sold
+           a.button data-bind="attr: { href: gameURL }" >>
 
 javascript:
   $(document).ready(function(){
