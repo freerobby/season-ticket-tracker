@@ -34,7 +34,23 @@ div.grid data-bind="if: game().listing"
 
 javascript:
   $(document).ready(function(){
-    var gameView = new GameViewModel("/game/1/");
+    var gameID = 0;
+
+    var currentURL = document.URL;
+    var regex = /http:\/\/.+\/admin\/game\/(\d)+\/?/g;
+    var reg = regex.exec(currentURL);
+
+    if (reg.length >= 2)
+    {
+      gameID = reg[1];
+    }
+
+    if (gameID == 0)
+    {
+      return;
+    }
+
+    var gameView = new GameViewModel("/game/" + gameID + "/");
     ko.applyBindings(gameView);
     gameView.loadData();
   });
