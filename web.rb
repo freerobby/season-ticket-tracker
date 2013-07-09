@@ -66,7 +66,7 @@ class Web < Sinatra::Base
   get '/admin/?' do
     slim :admin, :locals => build_view_options("Administration", true)
   end
-  
+
   get '/admin/game/:id/?' do
     slim :game, :locals => build_view_options("Game", true)
   end
@@ -75,19 +75,9 @@ class Web < Sinatra::Base
 
   get '/game/:id/?' do
     season_game = SeasonGame.first(:game => {:id => params[:id]})
-    
-    game_data = Hash.new
-    
-    game_data[:used] = season_game.used
-    game_data[:sold] = season_game.sold
-    game_data[:active] = season_game.active
-    game_data[:id] = season_game.game.id
-    game_data[:opponent] = season_game.game.opponent
-    game_data[:location] = season_game.game.location
-    game_data[:description] = season_game.game.description
-    game_data[:gametime] = season_game.game.gametime
-    game_data[:created_at] = season_game.game.created_at
-    
+
+    game_data = season_game.build_game_hash()
+
     game_data.to_json
   end
 
@@ -111,17 +101,7 @@ class Web < Sinatra::Base
     return_data = Array.new
 
     games_data.each do |season_game|
-      game_data = Hash.new
-
-      game_data[:used] = season_game.used
-      game_data[:sold] = season_game.sold
-      game_data[:active] = season_game.active
-      game_data[:id] = season_game.game.id
-      game_data[:opponent] = season_game.game.opponent
-      game_data[:location] = season_game.game.location
-      game_data[:description] = season_game.game.description
-      game_data[:gametime] = season_game.game.gametime
-      game_data[:created_at] = season_game.game.created_at
+      game_data = season_game.build_game_hash()
 
       return_data.push(game_data)
     end
