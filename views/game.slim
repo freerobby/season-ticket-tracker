@@ -17,6 +17,21 @@ div.grid
        a.button href="" data-bind="css: { used: game().used }, click: toggleUsedStatus" Used
        a.button href="" data-bind="css: { sold: game().sold }, click: toggleSoldStatus" Sold
 
+div.grid data-bind="if: game().listing"
+  nav.unit.whole
+    h4 Listing
+    ' Source:
+    span data-bind="text: game().listing.source"
+    br
+    ' Initial Price:
+    span data-bind="text: game().listing.initial_price"
+    br
+    ' List Date:
+    span data-bind="text: game().listing.list_date"
+    br
+    ' Sell Date:
+    span data-bind="text: game().listing.sell_date"
+
 javascript:
   $(document).ready(function(){
     var gameView = new GameViewModel("/game/1/");

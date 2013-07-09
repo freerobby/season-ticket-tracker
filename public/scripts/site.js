@@ -8,6 +8,18 @@ function Season(data) {
   self.games = $.map(data.games, function(item) { return new Game(item) });
 }
 
+function Listing(data) {
+  var self = this;
+
+  if (!data) return;
+
+  self.initial_price = data.initial_price;
+  self.source = data.source;
+  self.list_date = data.list_date;
+  self.sell_date = data.sell_date;
+  self.created_at = data.created_at;
+}
+
 function Game(data) {
   var self = this;
 
@@ -36,6 +48,8 @@ function Game(data) {
   // expected time from server is EDT
   self.time_of_day = moment(self.datetime).subtract("hours", 1).format("hh:mm A") + " CDT";
   self.date = self.datetime.format("MMMM DD");
+
+  self.listing = new Listing(data.listing);
 }
 
 function ViewModel(gamesURL) {
