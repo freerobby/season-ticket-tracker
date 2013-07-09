@@ -49,6 +49,12 @@ function Game(data) {
   self.time_of_day = moment(self.datetime).subtract("hours", 1).format("hh:mm A") + " CDT";
   self.date = self.datetime.format("MMMM DD");
 
+  // do not set the listing property if none
+  if (!data.listing || !data.listing.source)
+  {
+    return;
+  }
+
   self.listing = new Listing(data.listing);
 }
 
