@@ -10,7 +10,7 @@ class SeasonGame
 
   belongs_to :season
   belongs_to :game
-  has 1, :listing
+  has n, :listing
 
   def build_game_hash
     game_data = Hash.new
@@ -31,17 +31,23 @@ class SeasonGame
     game_data[:gametime] = self.game.gametime
     game_data[:created_at] = self.game.created_at
 
-    listing_data = Hash.new
+    listings = Array.new
 
-    if not self.listing.nil?
-      listing_data[:initial_price] = self.listing.initial_price
-      listing_data[:source] = self.listing.source
-      listing_data[:list_date] = self.listing.list_date
-      listing_data[:sell_date] = self.listing.sell_date
-      listing_data[:created_at] = self.listing.created_at
+    if not self.listing.nil? and not self.listing.empty?
+      self.listing.each do |listing|
+        listing_data = Hash.new
+
+        listing_data[:initial_price] = listing.initial_price
+        listing_data[:source] = listing.source
+        listing_data[:list_date] = listing.list_date
+        listing_data[:sell_date] = listing.sell_date
+        listing_data[:created_at] = listing.created_at
+
+        listings.push(listing_data)
+      end
     end
 
-    game_data[:listing] = listing_data
+    game_data[:listings] = listings
 
     game_data
   end
