@@ -1,27 +1,30 @@
 div.grid
   nav.unit.half
     ' Game ID:
-    span data-bind="text: game().game_id"
+    span data-bind="text: game.game_id"
     br
     ' Game Location:
-    span data-bind="text: game().location"
+    span data-bind="text: game.location"
     br
     ' Game Opponent:
-    span data-bind="text: game().opponent"
+    span data-bind="text: game.opponent"
     br
     ' Game Date/Time:
-    span data-bind="text: game().datetime"
+    span data-bind="text: game.datetime"
   nav.unit.half
     div
-       a.button href="" data-bind="css: { active: game().active }, click: toggleActiveStatus" Active
-       a.button href="" data-bind="css: { used: game().used }, click: toggleUsedStatus" Used
-       a.button href="" data-bind="css: { sold: game().sold }, click: toggleSoldStatus" Sold
+       a.button href="" data-bind="css: { active: game.active }, click: toggleActiveStatus" Active
+       a.button href="" data-bind="css: { used: game.used }, click: toggleUsedStatus" Used
+       a.button href="" data-bind="css: { sold: game.sold }, click: toggleSoldStatus" Sold
 
 div.grid
   nav.unit.whole
     h4 Listings
 
-    table data-bind="foreach: game().listings"
+    span data-bind="visible: !game.hasListings()"
+      | No listings were found.
+
+    table data-bind="foreach: game.listings"
       tr
         td
           | Source:
@@ -54,7 +57,8 @@ javascript:
       return;
     }
 
-    var gameView = new GameViewModel("/game/" + gameID + "/");
-    ko.applyBindings(gameView);
-    gameView.loadData();
+    $.getJSON("/game/" + gameID + "/", function(raw) {
+        var gameView = new GameViewModel(raw);
+        ko.applyBindings(gameView);
+    });
   });

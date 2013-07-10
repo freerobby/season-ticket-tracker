@@ -11,8 +11,6 @@ function Season(data) {
 function Listing(data) {
   var self = this;
 
-  if (!data) return;
-
   self.initial_price = data.initial_price;
   self.source = data.source;
   self.list_date = data.list_date;
@@ -22,8 +20,6 @@ function Listing(data) {
 
 function Game(data) {
   var self = this;
-
-  if (!data) return;
 
   self.datetime = moment(data.gametime, "YYYY-MM-DD HH:mm:ss ZZ");
   self.opponent = data.opponent;
@@ -49,7 +45,10 @@ function Game(data) {
   self.time_of_day = moment(self.datetime).subtract("hours", 1).format("hh:mm A") + " CDT";
   self.date = self.datetime.format("MMMM DD");
 
-  self.listings = ko.observableArray([]);
+  self.listings = ko.observableArray();
+  self.hasListings = ko.computed(function() {
+    return self.listings().length > 0;
+  }, self);
 
   // do not set the listing property if none
   if (!data.listings || data.listings.length == 0)
