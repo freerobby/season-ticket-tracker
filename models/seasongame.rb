@@ -37,11 +37,13 @@ class SeasonGame
       self.listing.each do |listing|
         listing_data = Hash.new
 
+        listing_data[:id] = listing.id
         listing_data[:initial_price] = listing.initial_price
         listing_data[:source] = listing.source
         listing_data[:list_date] = listing.list_date
         listing_data[:sell_date] = listing.sell_date
         listing_data[:created_at] = listing.created_at
+        listing_data[:is_active] = listing.is_active
 
         listings.push(listing_data)
       end

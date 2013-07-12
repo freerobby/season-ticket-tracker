@@ -163,4 +163,24 @@ a.button.active { background-color: #E74C3C; }
 a.button.sold { background-color: #E74C3C; }
 a.button.used { background-color: #E74C3C; }
 
-a.button:hover { background-color: #3498db; }
+a.button:hover { background-color: #E74C3C; }
+
+.listings table thead td {
+  background-color: #cecece;
+  font-weight: 800;
+  padding: 7px;
+  text-align: center;
+}
+
+.listings table tbody tr {
+  border-bottom: 1px solid #cecece;
+}
+
+.listings table tbody tr.active {
+  background-color: #f8e3e0;
+}
+
+.listings table tbody td {
+  padding: 7px;
+  text-align: center;
+}

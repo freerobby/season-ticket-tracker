@@ -8,6 +8,7 @@ class Listing
   property :list_date,      DateTime
   property :sell_date,      DateTime
   property :created_at,     DateTime
+  property :is_active,      Boolean     # only one active listing per game
 
   belongs_to :season_game
 

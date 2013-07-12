@@ -8,14 +8,23 @@ function Season(data) {
   self.games = $.map(data.games, function(item) { return new Game(item) });
 }
 
-function Listing(data) {
+function Listing(game, data) {
   var self = this;
 
+  // store the game
+  self.game = game;
+
+  self.id = data.id;
   self.initial_price = data.initial_price;
   self.source = data.source;
   self.list_date = data.list_date;
   self.sell_date = data.sell_date;
   self.created_at = data.created_at;
+  self.is_active = ko.observable(data.is_active);
+
+  self.setActiveListing = function(listing) {
+    game.setActiveListing(self.id);
+  }
 }
 
 function Game(data) {
@@ -50,13 +59,26 @@ function Game(data) {
     return self.listings().length > 0;
   }, self);
 
+  self.setActiveListing = function(activeListingID) {
+    $.each(self.listings(), function() {
+      if (this.id == activeListingID)
+      {
+        this.is_active(true);
+      } else {
+        this.is_active(false);
+      }
+    });
+
+    // TODO: save the listing data
+  }
+
   // do not set the listing property if none
   if (!data.listings || data.listings.length == 0)
   {
     return;
   }
 
-  self.listings($.map(data.listings, function(item) { return new Listing(item) }));
+  self.listings($.map(data.listings, function(item) { return new Listing(self, item) }));
 }
 
 function ViewModel(gamesURL) {

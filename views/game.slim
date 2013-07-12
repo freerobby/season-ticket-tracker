@@ -28,27 +28,39 @@ script type="text/html" id="gameTemplate"
          a.button href="" data-bind="css: { used: game.used }, click: toggleUsedStatus" Used
          a.button href="" data-bind="css: { sold: game.sold }, click: toggleSoldStatus" Sold
 
-  div.grid
+  div.grid.listings
     div.unit.whole
       h4 Listings
 
       span data-bind="visible: !game.hasListings()"
         | No listings were found.
 
-      table data-bind="foreach: game.listings"
-        tr
-          td
-            | Source:
-          td data-bind="text: source"
-          td
-            | Initial Price:
-          td data-bind="text: initial_price"
-          td
-            | List Date:
-          td data-bind="text: list_date"
-          td
-            |Sell Date:
-          td data-bind="text: sell_date"
+      table
+        thead
+          tr
+            td width="80px"
+              | ID
+            td width="80px"
+              | Source
+            td width="100px"
+              | Initial Price
+            td width="100px"
+              | List Date
+            td width="100px"
+              | Sell Date
+            td width="100px"
+            td width="100px"
+        tbody data-bind="foreach: game.listings"
+          tr data-bind="css: { active: is_active}"
+            td data-bind="text: id"
+            td data-bind="text: source"
+            td data-bind="text: initial_price"
+            td data-bind="text: list_date"
+            td data-bind="text: sell_date"
+            td data-bind="ifnot: is_active"
+              a href="" data-bind="click: setActiveListing" Set Active
+            td
+              | Delete
 
 javascript:
   $(document).ready(function(){
